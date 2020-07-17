@@ -1,0 +1,7 @@
+	Requirements
+
+1) Python3+ - Install any version of Python3.x(Recommended 3.6) through https://www.python.org/downloads/
+
+2) 'Requests' module - Install it by using 'pip install requests' in command prompt
+
+3) 'Xlwings' module - Install it by using 'pip install xlwings' in command prompt
