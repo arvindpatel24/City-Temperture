@@ -12,7 +12,7 @@ def fer_to_cel(fer):
 
 CITIES = ["Pune", "Jabalpur", "Delhi", "Jaipur", "Tokyo", "Rio", "Berlin", "Moscow", "Denver", "Nairobi", "Helsinki", "Oslo", "Lisbon", "Stockholm"]
 length = len(CITIES)
-Unit, Updation, changeTemp = ['C']*length, [1]*length, [0]*length
+Unit, Updation, convtTemp = ['C']*length, [1]*length, [0]*length
 temp, changeTemp=[],[0]*length
 
 for city in CITIES:
@@ -41,12 +41,12 @@ while(j<100):
 	
 	for i in range(len(CITIES)):
 		
-		if(('F' == sheet1.range('C'+str(i+2)).value or 'f' == sheet1.range('C'+str(i+2)).value) and (changeTemp[i] == 0)):
-			changeTemp[i] = 1
+		if(('F' == sheet1.range('C'+str(i+2)).value or 'f' == sheet1.range('C'+str(i+2)).value) and (convtTemp[i] == 0)):
+			convtTemp[i] = 1
 			temp[i] = cel_to_fer(temp[i])
 
-		elif(('C' == sheet1.range('C'+str(i+2)).value or 'c' == sheet1.range('C'+str(i+2)).value) and (changeTemp[i] == 1)):
-			changeTemp[i] = 0
+		elif(('C' == sheet1.range('C'+str(i+2)).value or 'c' == sheet1.range('C'+str(i+2)).value) and (convtTemp[i] == 1)):
+			convtTemp[i] = 0
 			temp[i] = fer_to_cel(temp[i])
 
 		if(sheet1.range('D'+str(i+2)).value == 1 ):
@@ -54,10 +54,9 @@ while(j<100):
 			data = rq.get(url).json()
 			temp[i] = data['main']['temp'] - 273.15
 
-			changeTemp = [0] * length
 
 			if(((sheet1.range('C'+str(i+2)).value == 'F') or (sheet1.range('C'+str(i+2)).value) == 'f') and (changeTemp[i] == 0)):
-				changeTemp[i] = 1
+				changeTemp[i] = 0
 				temp[i] = cel_to_fer(temp[i])
 			elif(('C' == sheet1.range('C'+str(i+2)).value or 'c' == sheet1.range('C'+str(i+2)).value) and (changeTemp[i] == 1)):
 				changeTemp[i] = 0
@@ -69,11 +68,3 @@ while(j<100):
 
 	time.sleep(2.5)
 	j=j+1
-
-
-
-
-
-
-
-
